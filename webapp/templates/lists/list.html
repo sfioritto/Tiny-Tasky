@@ -1,11 +1,11 @@
 <ul id="tasks">
-{% for task in tasks %}
-<li><p>{{task.text}}</p></li>
+{% for task in lst.tasks %}
+<li><p>{{task.id}}</p></li>
 {% endfor %}
 </ul>
 
 {{ form.errors }}
-<form method="post" action="{% url webapp.lists.views.show_list name %}">
+<form method="post" action="{% url webapp.lists.views.show_list lst.name %}">
   <table>
     <tr>
       <td>{{ form.text.label_tag }}</td>

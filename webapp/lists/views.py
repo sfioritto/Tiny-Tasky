@@ -21,25 +21,23 @@ def show_lists(request):
 def show_list(request, name):
 
     account = request.user.get_profile()
-    lst = lists.get_list(name, account.id)
+    lst = lists.get_list(name, account)
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
             text = form.cleaned_data['text']
-            lists.add_task(account, lst, text)
+            lst.add_task(text)
             return HttpResponseRedirect(reverse('webapp.lists.views.show_list', args=[name]))
         else:
             return render_to_response('lists/list.html', {
                     'form' : form,
-                    'name' : name,
-                    'tasks' : lst['tasks']
+                    'lst' : lst,
                     }, context_instance = RequestContext(request))
     else:
         return render_to_response('lists/list.html', {
                 'form' : TaskForm(),
-                'name' : name,
-                'tasks' : lst['tasks']
+                'lst' : lst,
                 }, context_instance = RequestContext(request))
 
 
