@@ -41,8 +41,17 @@ def get_list(name, id):
     return lst
 
 
-def add_task(lst, task):
+def create_task_id(text, account):
+    return sha1(text + ":" + account.email).hexdigest()
+
+
+def add_task(account, lst, text):
     
+    task = {
+        'text' : text,
+        'complete' : False,
+        'id' : create_task_id(text, account)}
+
     lst['tasks'].append(task)
     update_list(lst)
 

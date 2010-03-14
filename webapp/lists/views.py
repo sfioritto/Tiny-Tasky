@@ -27,7 +27,7 @@ def show_list(request, name):
         form = TaskForm(request.POST)
         if form.is_valid():
             text = form.cleaned_data['text']
-            lists.add_task(lst, {'text' : text, 'complete' : False})
+            lists.add_task(account, lst, text)
             return HttpResponseRedirect(reverse('webapp.lists.views.show_list', args=[name]))
         else:
             return render_to_response('lists/list.html', {
