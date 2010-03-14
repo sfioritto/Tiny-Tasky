@@ -1,0 +1,32 @@
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="{% url django.contrib.auth.views.login %}">
+  <table>
+    <tr>
+      <td>
+	<label>
+	  Username or email address
+	</label>
+	{{ form.username }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<label>
+	  {{ form.password.label_tag }}
+	</label>
+	{{ form.password }}
+      </td>
+    </tr>
+  </table>
+  
+  <input type="submit" value="Sign in" />
+</form>
+<p>
+  If you've never signed in before you need to 
+  <a href="{% url webapp.account.views.create %}">
+    create an account.
+ </a>
+</p>

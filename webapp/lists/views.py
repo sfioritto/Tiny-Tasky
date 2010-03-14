@@ -7,13 +7,13 @@ lists = pytyrant.PyTyrant.open('127.0.0.1', 1978)
 
 
 def lists(request):
-    return render_to_response('lists/lists.txt',
+    return render_to_response('lists/lists.html',
                               context_instance=RequestContext(request))
 
 
 @login_required
 def list(request, key):
-    return render_to_response('lists/list.txt',
+    return render_to_response('lists/list.html',
                               context_instance=RequestContext(request))
 
 

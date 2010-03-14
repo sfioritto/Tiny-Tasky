@@ -18,7 +18,7 @@ pidfile="$basedir/pid"
 #mhost="remotehost1"
 #mport="1978"
 #rtsfile="$basedir/rts"
-dbname="$basedir/tasks.tch#bnum=4000000#opts=b"
+dbname="$basedir/lists.tch#bnum=4000000#opts=b"
 maxcon="65535"
 retval=0
 
