@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from tiny.models import account
+from models import account
 
 def create(request):
     
