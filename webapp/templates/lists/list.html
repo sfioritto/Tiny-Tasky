@@ -1,0 +1,16 @@
+<ul id="tasks">
+{% for task in tasks %}
+<li><p>{{task.text}}</p></li>
+{% endfor %}
+</ul>
+
+{{ form.errors }}
+<form method="post" action="{% url webapp.lists.views.show_list name %}">
+  <table>
+    <tr>
+      <td>{{ form.text.label_tag }}</td>
+      <td>{{ form.text }}</td>
+    </tr>
+ </table>
+  <input type="submit" value="Create this task" />
+</form>

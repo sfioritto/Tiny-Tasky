@@ -67,3 +67,10 @@ class ListForm(forms.Form):
         #todo: check for validity of name, (must be a valid email address, e.g. length can't exceed 64 characters)
         return name
 
+
+
+class TaskForm(forms.Form):
+
+    text = forms.CharField()
+
+

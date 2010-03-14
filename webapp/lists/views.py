@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.template import RequestContext 
-from webapp.forms import ListForm
+from webapp.forms import ListForm, TaskForm
 from webapp.lists.models import List
 from app.model import lists
 
@@ -18,9 +18,29 @@ def show_lists(request):
 
 
 @login_required
-def show_list(request, key):
-    return render_to_response('lists/list.html',
-                              context_instance=RequestContext(request))
+def show_list(request, name):
+
+    account = request.user.get_profile()
+    lst = lists.get_list(name, account.id)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            lists.add_task(lst, {'text' : text, 'complete' : False})
+            return HttpResponseRedirect(reverse('webapp.lists.views.show_list', args=[name]))
+        else:
+            return render_to_response('lists/list.html', {
+                    'form' : form,
+                    'name' : name,
+                    'tasks' : lst['tasks']
+                    }, context_instance = RequestContext(request))
+    else:
+        return render_to_response('lists/list.html', {
+                'form' : TaskForm(),
+                'name' : name,
+                'tasks' : lst['tasks']
+                }, context_instance = RequestContext(request))
 
 
 @login_required
@@ -42,5 +62,3 @@ def create(request):
                 }, context_instance = RequestContext(request))
 
     
-
-

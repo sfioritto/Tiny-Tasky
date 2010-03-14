@@ -4,5 +4,5 @@ urlpatterns = patterns(
     'webapp.lists.views',
     (r'^$', 'show_lists'),
     (r'^create/$', 'create'),
-    (r'^(?P<key>.+)/$', 'show_list'),
+    (r'^(?P<name>.+)/$', 'show_list'),
 )

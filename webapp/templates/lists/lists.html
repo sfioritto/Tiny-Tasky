@@ -1,3 +1,5 @@
 {% for lst in lists %}
-<p>{{ lst.name }}</p>
+<p><a href="{{ lst.url }}">{{ lst.name }}</a></p>
 {% endfor %}
+
+<a href="{% url webapp.lists.views.create %}">Create a new list</a>
