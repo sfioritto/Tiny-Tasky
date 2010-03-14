@@ -64,6 +64,6 @@ class ListForm(forms.Form):
 
         name = self.cleaned_data['listname']
         
-        #todo: check for validity of name, (no numbers, so list names will be unique)
+        #todo: check for validity of name, (must be a valid email address, e.g. length can't exceed 64 characters)
         return name
 

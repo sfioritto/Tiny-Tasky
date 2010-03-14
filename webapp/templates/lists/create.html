@@ -6,5 +6,8 @@
       <td>{{ form.listname }}</td>
     </tr>
  </table>
-  <input type="submit" value="login" />
+ <p>
+  <input type="submit" value="Create this list." /> or
+ <a href="{% url webapp.lists.views.show_lists %}">Cancel</a>
+ </p>
 </form>
