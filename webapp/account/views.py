@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from app.model import lists
+from app.model import accounts
 from webapp.forms import AccountForm
 
 #Django hack to let us put emails in the username field in the login form
@@ -25,7 +25,7 @@ def create(request):
             #stored in the account object.
             user = User.objects.create_user(username, '', password)
             user.save()
-            acc = lists.create_account(email)
+            acc = accounts.create_account(email)
 
             acc.user = user
             acc.save()

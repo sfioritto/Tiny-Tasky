@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from app.model import lists
 from webapp.account.models import Account
 
 
@@ -53,3 +54,16 @@ class AccountForm(forms.Form):
             raise forms.ValidationError("An account for this email address has already been created.")
         else:
             return email
+
+
+class ListForm(forms.Form):
+
+    listname = forms.CharField(max_length=30)
+
+    def clean_username(self):
+
+        name = self.cleaned_data['listname']
+        
+        #todo: check for validity of name, (no numbers, so list names will be unique)
+        return name
+

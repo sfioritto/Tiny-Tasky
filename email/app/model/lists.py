@@ -1,29 +1,36 @@
-from webapp.account.models import Account
+import json
+import pytyrant
+from hashlib import sha1
+
+lists = pytyrant.PyTyrant.open('127.0.0.1', 1978)
 
 
-def find_account(email):
+def make_key(name, unique):
+    
+    return sha1(name + str(unique)).hexdigest()
+    
+
+def create(name, unique, value=[]):
 
     """
-    Finds and returns the account with the
-    given email address. Returns None
-    if nothing is found.
+    Create a list if it doesn't exist and return
+    it. Otherwise, return the list that exists.
     """
+    
+    lst = get_list(name, unique)
+    if lst:
+        return lst
+    else:
+        key = make_key(name, unique)
+        lists[key] = json.dumps(value)
+        return lists[key]
 
+
+def get_list(name, unique):
+    
     try:
-        return Account.objects.get(pk=email)
-    except Account.DoesNotExist:
-        return None
-    
+        lst = json.loads(lists[make_key(name, unique)])
+    except KeyError:
+        lst = None
 
-def create_account(email):
-    
-    """
-    Returns an account if it already
-    exists, otherwise creates it.
-    """
-
-    acc = find_account(email)
-    if not acc:
-        acc = Account(email=email)
-        acc.save()
-    return acc
+    return lst
