@@ -1,1 +1,5 @@
-This is your initial Lamson application.
+Email based todo list. Send an email to projects@tinytasky.com and it adds a todo to your projects list. You can
+create lists on the fly. It also tracked email conversations as long as the subject stayed the same and
+the tinytasky email was CC'd. 
+
+This project is dead and incomplete.
